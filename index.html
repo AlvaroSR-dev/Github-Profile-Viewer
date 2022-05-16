@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Github Profiles</title>
+
+    <!-- Dependencies -->
+
+    <link rel="icon" type="image/x-icon" href="icon.png" />
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <script src="main.js" defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
+    <!-- Styles -->
+
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600&display=swap");
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-image: radial-gradient(circle farthest-corner at 10% 20%, rgba(87, 108, 117, 1) 0%, rgba(37, 50, 55, 1) 100.2%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: "Poppins", sans-serif;
+            margin: 0;
+            min-height: 100vh;
+        }
+
+        input, #download {
+            background-color: rgba(0, 0, 0, 1);
+            border-radius: 10px;
+            border: none;
+            box-shadow: 0 5px 10px rgba(154, 160, 185, 0.05),
+                0 15px 40px rgba(0, 0, 0, 0.1);
+            color: white;
+            font-family: inherit;
+            font-size: 1rem;
+            padding: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        input::placeholder {
+            color: #bbb;
+        }
+
+        input:focus {
+            outline: none;
+        }
+
+        .card {
+            background: linear-gradient(to bottom, #323232 0%, #3F3F3F 40%, #1C1C1C 150%), linear-gradient(to top, rgba(255, 255, 255, 0.40) 0%, rgba(0, 0, 0, 0.25) 200%);
+            background-blend-mode: multiply;
+            border-radius: 20px;
+            box-shadow: 0 5px 10px rgba(154, 160, 185, 0.05),
+                0 15px 40px rgba(0, 0, 0, 0.1);
+            display: flex;
+            padding: 3rem;
+            max-width: 800px;
+        }
+
+        .avatar {
+            border: 5px solid white;
+            border-radius: 50%;
+            height: 150px;
+            width: 150px;
+        }
+
+        .user-info {
+            color: #eee;
+            margin-left: 2rem;
+        }
+
+        .user-info h2 {
+            margin-top: 0;
+        }
+
+        .user-info ul {
+            display: flex;
+            justify-content: space-between;
+            list-style-type: none;
+            padding: 0;
+            max-width: 400px;
+        }
+
+        .user-info ul li {
+            display: flex;
+            align-items: center;
+        }
+
+        .user-info ul li strong {
+            font-size: 0.9rem;
+            margin-left: 0.5rem;
+        }
+
+        .repo {
+            background-color: black;
+            border-radius: 5px;
+            display: inline-block;
+            color: white;
+            font-size: 0.7rem;
+            padding: 0.25rem 0.5rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            text-decoration: none;
+        }
+
+        #download:hover, #submit:hover{
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <form id="form">
+        <input type="text" id="search" placeholder="Search a Github profile">
+        <input type="submit" value="Search" id="submit">
+    </form>
+    <div id="main"></div>
+    <br>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <button id="download">Download</button>
+
+    <script>
+        document.getElementById("download").onclick = function () {
+            const screenshotTarget = document.getElementById('main');
+
+            html2canvas(screenshotTarget).then((canvas) => {
+                const base64image = canvas.toDataURL("image/png");
+                var anchor = document.createElement('a');
+                anchor.setAttribute("href", base64image);
+                anchor.setAttribute("download", "github-profile.png");
+                anchor.click();
+                anchor.remove();
+            });
+        }
+    </script>
+</body>
+
+</html>
